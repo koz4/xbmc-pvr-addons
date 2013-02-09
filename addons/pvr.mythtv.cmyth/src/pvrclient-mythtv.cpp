@@ -219,7 +219,7 @@ bool PVRClientMythTV::Connect()
   }
 
   // Create file operation helper (image caching)
-  m_fileOps = new FileOps(m_con);
+  //m_fileOps = new FileOps(m_con);
 
   return true;
 }
@@ -533,8 +533,8 @@ PVR_ERROR PVRClientMythTV::GetRecordings(ADDON_HANDLE handle)
       CStdString strIconPath;
       if (!it->second.Coverart().IsEmpty())
         strIconPath = GetArtWork(FileOps::FileTypeCoverart, it->second.Coverart());
-      else
-        strIconPath = m_fileOps->GetPreviewIconPath(it->second.IconPath(), it->second.RecordingGroup());
+      //else
+        //strIconPath = m_fileOps->GetPreviewIconPath(it->second.IconPath(), it->second.RecordingGroup());
 
       CStdString strFanartPath;
       if (!it->second.Fanart().IsEmpty())
@@ -1260,8 +1260,8 @@ bool PVRClientMythTV::OpenLiveStream(const PVR_CHANNEL &channel)
     LoadChannelsAndChannelGroups();
 
     // Suspend fileOps to avoid connection hang
-    if (m_fileOps->IsRunning())
-      m_fileOps->Suspend();
+    //if (m_fileOps->IsRunning())
+    //  m_fileOps->Suspend();
 
     // Enable playback mode: Keep quiet on connection
     m_pEventHandler->EnablePlayback();
@@ -1320,7 +1320,7 @@ bool PVRClientMythTV::OpenLiveStream(const PVR_CHANNEL &channel)
     m_pEventHandler->DisablePlayback();
 
     // Resume fileOps
-    m_fileOps->Resume();
+    //m_fileOps->Resume();
 
     XBMC->Log(LOG_ERROR,"%s - Failed to open live stream", __FUNCTION__);
     XBMC->QueueNotification(QUEUE_WARNING, XBMC->GetLocalizedString(30305)); // Channel unavailable
@@ -1355,7 +1355,7 @@ void PVRClientMythTV::CloseLiveStream()
   m_pEventHandler->AllowLiveChainUpdate();
 
   // Resume fileOps
-  m_fileOps->Resume();
+  //m_fileOps->Resume();
 
   if (g_bExtraDebug)
     XBMC->Log(LOG_DEBUG, "%s - Done", __FUNCTION__);
@@ -1419,7 +1419,7 @@ bool PVRClientMythTV::SwitchChannel(const PVR_CHANNEL &channelinfo)
   if (!retval)
   {
     XBMC->Log(LOG_ERROR, "%s - Failed to reopening Livestream", __FUNCTION__);
-    m_fileOps->Resume();
+    //m_fileOps->Resume();
   }
 
   if (g_bExtraDebug)
@@ -1522,7 +1522,7 @@ bool PVRClientMythTV::OpenRecordedStream(const PVR_RECORDING &recording)
   if (it != m_recordings.end())
   {
     // Suspend fileOps to avoid connection hang
-    m_fileOps->Suspend();
+    //m_fileOps->Suspend();
 
     // Enable playback mode: Keep quiet on connection
     m_pEventHandler->EnablePlayback();
@@ -1533,7 +1533,7 @@ bool PVRClientMythTV::OpenRecordedStream(const PVR_RECORDING &recording)
     // Resume fileOps
     if (m_file.IsNull())
     {
-      m_fileOps->Resume();
+      //m_fileOps->Resume();
 
       // Disable playback mode: Allow all
       m_pEventHandler->DisablePlayback();
@@ -1558,7 +1558,7 @@ void PVRClientMythTV::CloseRecordedStream()
   m_pEventHandler->DisablePlayback();
 
   // Resume fileOps
-  m_fileOps->Resume();
+  //m_fileOps->Resume();
 
   if (g_bExtraDebug)
     XBMC->Log(LOG_DEBUG, "%s - Done", __FUNCTION__);
@@ -1639,17 +1639,18 @@ void PVRClientMythTV::SetLiveTVPriority(bool enabled)
 
 CStdString PVRClientMythTV::GetArtWork(FileOps::FileType storageGroup, const CStdString &shwTitle)
 {
-  if (storageGroup == FileOps::FileTypeCoverart || storageGroup == FileOps::FileTypeFanart)
-  {
-    return m_fileOps->GetArtworkPath(shwTitle, storageGroup);
-  }
-  else if (storageGroup == FileOps::FileTypeChannelIcon)
-  {
-    return m_fileOps->GetChannelIconPath(shwTitle);
-  }
-  else
-  {
-    XBMC->Log(LOG_DEBUG, "%s - ## Not a valid storageGroup ##", __FUNCTION__);
-    return "";
-  }
+  //if (storageGroup == FileOps::FileTypeCoverart || storageGroup == FileOps::FileTypeFanart)
+  //{
+  //  return m_fileOps->GetArtworkPath(shwTitle, storageGroup);
+  //}
+  //else if (storageGroup == FileOps::FileTypeChannelIcon)
+  //{
+  //  return m_fileOps->GetChannelIconPath(shwTitle);
+  //}
+  //else
+  //{
+  //  XBMC->Log(LOG_DEBUG, "%s - ## Not a valid storageGroup ##", __FUNCTION__);
+  //  return "";
+  //}
+  return "";
 }

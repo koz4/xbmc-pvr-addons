@@ -87,6 +87,8 @@ ADDON_STATUS ADDON_Create(void *hdl, void *props)
 
   XBMC->Log(LOG_DEBUG, "Addon compiled with XBMC_PVR_API_VERSION: %s and XBMC_PVR_MIN_API_VERSION: %s", GetPVRAPIVersion(), GetMininumPVRAPIVersion());
 
+  XBMC->Log(LOG_DEBUG, "Test-Build for debugging high backend CPU usage");
+
   XBMC->Log(LOG_DEBUG, "Register handle @ libXBMC_addon...done");
 
   XBMC->Log(LOG_DEBUG, "Checking props...");
