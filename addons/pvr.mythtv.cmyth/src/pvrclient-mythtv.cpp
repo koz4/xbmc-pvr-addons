@@ -618,7 +618,7 @@ void PVRClientMythTV::EventUpdateRecordings()
             XBMC->Log(LOG_DEBUG, "%s - Update recording: %s", __FUNCTION__, prog.UID().c_str());
 
           // Copy cached framerate
-          prog.SetFramerate(it->second.Framterate());
+          prog.SetFrameRate(it->second.FrameRate());
 
           // Fill artwork
           m_db.FillRecordingArtwork(prog);
@@ -662,7 +662,7 @@ void PVRClientMythTV::ForceUpdateRecording(ProgramInfoMap::iterator it)
     if (!prog.IsNull())
     {
       // Copy cached framerate
-      prog.SetFramerate(it->second.Framterate());
+      prog.SetFrameRate(it->second.FrameRate());
 
       // Fill artwork
       m_db.FillRecordingArtwork(prog);
@@ -776,10 +776,10 @@ PVR_ERROR PVRClientMythTV::SetRecordingLastPlayedPosition(const PVR_RECORDING &r
   if (it != m_recordings.end())
   {
     // pin framerate value
-    if (it->second.Framterate() < 0)
-      it->second.SetFramerate(m_db.GetRecordingFrameRate(it->second));
+    if (it->second.FrameRate() < 0)
+      it->second.SetFrameRate(m_db.GetRecordingFrameRate(it->second));
     // Calculate the frame offset
-    long long frameOffset = (long long)(lastplayedposition * it->second.Framterate() / 1000.0f);
+    long long frameOffset = (long long)(lastplayedposition * it->second.FrameRate() / 1000.0f);
     if (frameOffset < 0) frameOffset = 0;
     if (g_bExtraDebug)
     {
@@ -831,9 +831,9 @@ int PVRClientMythTV::GetRecordingLastPlayedPosition(const PVR_RECORDING &recordi
         XBMC->Log(LOG_DEBUG, "%s - FrameOffset: %lld)", __FUNCTION__, frameOffset);
       }
       // Pin framerate value
-      if (it->second.Framterate() <0)
-        it->second.SetFramerate(m_db.GetRecordingFrameRate(it->second));
-      float frameRate = (float)it->second.Framterate() / 1000.0f;
+      if (it->second.FrameRate() <0)
+        it->second.SetFrameRate(m_db.GetRecordingFrameRate(it->second));
+      float frameRate = (float)it->second.FrameRate() / 1000.0f;
       if (frameRate > 0)
       {
         bookmark = (int)((float)frameOffset / frameRate);
