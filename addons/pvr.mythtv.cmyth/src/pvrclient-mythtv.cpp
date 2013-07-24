@@ -518,7 +518,7 @@ PVR_ERROR PVRClientMythTV::GetRecordings(ADDON_HANDLE handle)
       tag.iDuration = it->second.Duration();
       tag.iPlayCount = it->second.IsWatched() ? 1 : 0;
 
-      CStdString id = it->second.UID();
+      CStdString id = it->first;
       CStdString title = it->second.Title();
       CStdString subtitle = it->second.Subtitle();
       if (!subtitle.IsEmpty())
